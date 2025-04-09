@@ -53,6 +53,8 @@ Partial Class Form1
         Me.dtFechaFinProyecto = New System.Windows.Forms.DateTimePicker()
         Me.grbNuevoProyecto = New System.Windows.Forms.GroupBox()
         Me.grbCrearActividad = New System.Windows.Forms.GroupBox()
+        Me.txtUbicacion = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.txtNombreNuevaActividad = New System.Windows.Forms.TextBox()
         Me.cboProyectosCrearActividad = New System.Windows.Forms.ComboBox()
         Me.dtFechaFinActividad = New System.Windows.Forms.DateTimePicker()
@@ -64,20 +66,30 @@ Partial Class Form1
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtUbicacion = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
+        Me.cboProyectosAñadirODS = New System.Windows.Forms.ComboBox()
+        Me.cboProyectosEliminarODS = New System.Windows.Forms.ComboBox()
+        Me.btnAñadirODSProyecto = New System.Windows.Forms.Button()
+        Me.btnBuscarODSProyecto = New System.Windows.Forms.Button()
+        Me.btnEliminarODSProyecto = New System.Windows.Forms.Button()
+        Me.lsbAñadirODS = New System.Windows.Forms.ListBox()
+        Me.lsbEliminarODS = New System.Windows.Forms.ListBox()
+        Me.grbEliminarODS = New System.Windows.Forms.GroupBox()
+        Me.grbAñadirODSProyecto = New System.Windows.Forms.GroupBox()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grbInfoProyecto.SuspendLayout()
         Me.grbModificarDescripcionProyecto.SuspendLayout()
         Me.grbAñadirAlumnoActividad.SuspendLayout()
         Me.grbNuevoProyecto.SuspendLayout()
         Me.grbCrearActividad.SuspendLayout()
+        Me.grbEliminarODS.SuspendLayout()
+        Me.grbAñadirODSProyecto.SuspendLayout()
         Me.SuspendLayout()
         '
         'dgv
         '
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv.Location = New System.Drawing.Point(844, 48)
+        Me.dgv.MultiSelect = False
         Me.dgv.Name = "dgv"
         Me.dgv.RowHeadersWidth = 51
         Me.dgv.RowTemplate.Height = 24
@@ -377,6 +389,22 @@ Partial Class Form1
         Me.grbCrearActividad.TabStop = False
         Me.grbCrearActividad.Text = "Crear nueva actividad"
         '
+        'txtUbicacion
+        '
+        Me.txtUbicacion.Location = New System.Drawing.Point(164, 185)
+        Me.txtUbicacion.Name = "txtUbicacion"
+        Me.txtUbicacion.Size = New System.Drawing.Size(222, 22)
+        Me.txtUbicacion.TabIndex = 37
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(18, 189)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(68, 16)
+        Me.Label14.TabIndex = 36
+        Me.Label14.Text = "Ubicación"
+        '
         'txtNombreNuevaActividad
         '
         Me.txtNombreNuevaActividad.Location = New System.Drawing.Point(164, 76)
@@ -396,6 +424,7 @@ Partial Class Form1
         '
         Me.dtFechaFinActividad.Location = New System.Drawing.Point(164, 148)
         Me.dtFechaFinActividad.Name = "dtFechaFinActividad"
+        Me.dtFechaFinActividad.ShowCheckBox = True
         Me.dtFechaFinActividad.Size = New System.Drawing.Size(222, 22)
         Me.dtFechaFinActividad.TabIndex = 31
         '
@@ -468,27 +497,101 @@ Partial Class Form1
         Me.Label13.TabIndex = 3
         Me.Label13.Text = "Proyectos"
         '
-        'txtUbicacion
+        'cboProyectosAñadirODS
         '
-        Me.txtUbicacion.Location = New System.Drawing.Point(164, 185)
-        Me.txtUbicacion.Name = "txtUbicacion"
-        Me.txtUbicacion.Size = New System.Drawing.Size(222, 22)
-        Me.txtUbicacion.TabIndex = 37
+        Me.cboProyectosAñadirODS.FormattingEnabled = True
+        Me.cboProyectosAñadirODS.Location = New System.Drawing.Point(16, 21)
+        Me.cboProyectosAñadirODS.Name = "cboProyectosAñadirODS"
+        Me.cboProyectosAñadirODS.Size = New System.Drawing.Size(293, 24)
+        Me.cboProyectosAñadirODS.TabIndex = 34
         '
-        'Label14
+        'cboProyectosEliminarODS
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(18, 189)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(68, 16)
-        Me.Label14.TabIndex = 36
-        Me.Label14.Text = "Ubicación"
+        Me.cboProyectosEliminarODS.FormattingEnabled = True
+        Me.cboProyectosEliminarODS.Location = New System.Drawing.Point(19, 31)
+        Me.cboProyectosEliminarODS.Name = "cboProyectosEliminarODS"
+        Me.cboProyectosEliminarODS.Size = New System.Drawing.Size(276, 24)
+        Me.cboProyectosEliminarODS.TabIndex = 35
+        '
+        'btnAñadirODSProyecto
+        '
+        Me.btnAñadirODSProyecto.Location = New System.Drawing.Point(16, 58)
+        Me.btnAñadirODSProyecto.Name = "btnAñadirODSProyecto"
+        Me.btnAñadirODSProyecto.Size = New System.Drawing.Size(293, 23)
+        Me.btnAñadirODSProyecto.TabIndex = 36
+        Me.btnAñadirODSProyecto.Text = "Añadir ODS a proyecto"
+        Me.btnAñadirODSProyecto.UseVisualStyleBackColor = True
+        '
+        'btnBuscarODSProyecto
+        '
+        Me.btnBuscarODSProyecto.Location = New System.Drawing.Point(19, 68)
+        Me.btnBuscarODSProyecto.Name = "btnBuscarODSProyecto"
+        Me.btnBuscarODSProyecto.Size = New System.Drawing.Size(276, 23)
+        Me.btnBuscarODSProyecto.TabIndex = 37
+        Me.btnBuscarODSProyecto.Text = "Buscar ODSs del proyecto"
+        Me.btnBuscarODSProyecto.UseVisualStyleBackColor = True
+        '
+        'btnEliminarODSProyecto
+        '
+        Me.btnEliminarODSProyecto.Location = New System.Drawing.Point(19, 103)
+        Me.btnEliminarODSProyecto.Name = "btnEliminarODSProyecto"
+        Me.btnEliminarODSProyecto.Size = New System.Drawing.Size(276, 22)
+        Me.btnEliminarODSProyecto.TabIndex = 38
+        Me.btnEliminarODSProyecto.Text = "Eliminar ODS de proyecto"
+        Me.btnEliminarODSProyecto.UseVisualStyleBackColor = True
+        '
+        'lsbAñadirODS
+        '
+        Me.lsbAñadirODS.FormattingEnabled = True
+        Me.lsbAñadirODS.ItemHeight = 16
+        Me.lsbAñadirODS.Location = New System.Drawing.Point(16, 99)
+        Me.lsbAñadirODS.Name = "lsbAñadirODS"
+        Me.lsbAñadirODS.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
+        Me.lsbAñadirODS.Size = New System.Drawing.Size(293, 196)
+        Me.lsbAñadirODS.TabIndex = 39
+        '
+        'lsbEliminarODS
+        '
+        Me.lsbEliminarODS.FormattingEnabled = True
+        Me.lsbEliminarODS.ItemHeight = 16
+        Me.lsbEliminarODS.Location = New System.Drawing.Point(19, 141)
+        Me.lsbEliminarODS.Name = "lsbEliminarODS"
+        Me.lsbEliminarODS.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
+        Me.lsbEliminarODS.Size = New System.Drawing.Size(276, 148)
+        Me.lsbEliminarODS.TabIndex = 40
+        '
+        'grbEliminarODS
+        '
+        Me.grbEliminarODS.Controls.Add(Me.lsbEliminarODS)
+        Me.grbEliminarODS.Controls.Add(Me.btnEliminarODSProyecto)
+        Me.grbEliminarODS.Controls.Add(Me.btnBuscarODSProyecto)
+        Me.grbEliminarODS.Controls.Add(Me.cboProyectosEliminarODS)
+        Me.grbEliminarODS.Location = New System.Drawing.Point(403, 336)
+        Me.grbEliminarODS.Name = "grbEliminarODS"
+        Me.grbEliminarODS.Size = New System.Drawing.Size(306, 301)
+        Me.grbEliminarODS.TabIndex = 41
+        Me.grbEliminarODS.TabStop = False
+        Me.grbEliminarODS.Text = "Buscar o eliminar ODS de proyecto"
+        '
+        'grbAñadirODSProyecto
+        '
+        Me.grbAñadirODSProyecto.Controls.Add(Me.lsbAñadirODS)
+        Me.grbAñadirODSProyecto.Controls.Add(Me.btnAñadirODSProyecto)
+        Me.grbAñadirODSProyecto.Controls.Add(Me.cboProyectosAñadirODS)
+        Me.grbAñadirODSProyecto.Location = New System.Drawing.Point(39, 327)
+        Me.grbAñadirODSProyecto.Name = "grbAñadirODSProyecto"
+        Me.grbAñadirODSProyecto.Size = New System.Drawing.Size(347, 310)
+        Me.grbAñadirODSProyecto.TabIndex = 42
+        Me.grbAñadirODSProyecto.TabStop = False
+        Me.grbAñadirODSProyecto.Text = "Añadir ODS a proyecto"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1513, 565)
+        Me.ClientSize = New System.Drawing.Size(1513, 649)
+        Me.Controls.Add(Me.grbAñadirODSProyecto)
+        Me.Controls.Add(Me.grbEliminarODS)
         Me.Controls.Add(Me.grbCrearActividad)
         Me.Controls.Add(Me.grbNuevoProyecto)
         Me.Controls.Add(Me.grbAñadirAlumnoActividad)
@@ -498,7 +601,7 @@ Partial Class Form1
         Me.Controls.Add(Me.lblInformacion)
         Me.Controls.Add(Me.dgv)
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "Aplicación para la gestión del voluntariado cuatrovientos"
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grbInfoProyecto.ResumeLayout(False)
         Me.grbModificarDescripcionProyecto.ResumeLayout(False)
@@ -509,6 +612,8 @@ Partial Class Form1
         Me.grbNuevoProyecto.PerformLayout()
         Me.grbCrearActividad.ResumeLayout(False)
         Me.grbCrearActividad.PerformLayout()
+        Me.grbEliminarODS.ResumeLayout(False)
+        Me.grbAñadirODSProyecto.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -557,4 +662,13 @@ Partial Class Form1
     Friend WithEvents txtNombreNuevaActividad As TextBox
     Friend WithEvents txtUbicacion As TextBox
     Friend WithEvents Label14 As Label
+    Friend WithEvents cboProyectosAñadirODS As ComboBox
+    Friend WithEvents cboProyectosEliminarODS As ComboBox
+    Friend WithEvents btnAñadirODSProyecto As Button
+    Friend WithEvents btnBuscarODSProyecto As Button
+    Friend WithEvents btnEliminarODSProyecto As Button
+    Friend WithEvents lsbAñadirODS As ListBox
+    Friend WithEvents lsbEliminarODS As ListBox
+    Friend WithEvents grbEliminarODS As GroupBox
+    Friend WithEvents grbAñadirODSProyecto As GroupBox
 End Class

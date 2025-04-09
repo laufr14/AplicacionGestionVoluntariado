@@ -31,6 +31,6 @@
 
     ' Método ToString 
     Public Overrides Function ToString() As String
-        Return Nombre & ", " & IDODS
+        Return IDODS & ": " & Nombre
     End Function
 End Class
