@@ -80,7 +80,7 @@ Partial Class Form1
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cboActividadesEliminar = New System.Windows.Forms.ComboBox()
         Me.cboProyectosEliminarAcividad = New System.Windows.Forms.ComboBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grbEliminarActividad = New System.Windows.Forms.GroupBox()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grbActividadesDeProyecto.SuspendLayout()
         Me.grbModificarDescripcionProyecto.SuspendLayout()
@@ -89,7 +89,7 @@ Partial Class Form1
         Me.grbCrearActividad.SuspendLayout()
         Me.grbEliminarODS.SuspendLayout()
         Me.grbAñadirODSProyecto.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.grbEliminarActividad.SuspendLayout()
         Me.SuspendLayout()
         '
         'dgv
@@ -646,26 +646,26 @@ Partial Class Form1
         Me.cboProyectosEliminarAcividad.Size = New System.Drawing.Size(209, 24)
         Me.cboProyectosEliminarAcividad.TabIndex = 43
         '
-        'GroupBox1
+        'grbEliminarActividad
         '
-        Me.GroupBox1.Controls.Add(Me.btnEliminarActividad)
-        Me.GroupBox1.Controls.Add(Me.Label15)
-        Me.GroupBox1.Controls.Add(Me.Label16)
-        Me.GroupBox1.Controls.Add(Me.cboActividadesEliminar)
-        Me.GroupBox1.Controls.Add(Me.cboProyectosEliminarAcividad)
-        Me.GroupBox1.Location = New System.Drawing.Point(1167, 472)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(332, 165)
-        Me.GroupBox1.TabIndex = 48
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "GroupBox1"
+        Me.grbEliminarActividad.Controls.Add(Me.btnEliminarActividad)
+        Me.grbEliminarActividad.Controls.Add(Me.Label15)
+        Me.grbEliminarActividad.Controls.Add(Me.Label16)
+        Me.grbEliminarActividad.Controls.Add(Me.cboActividadesEliminar)
+        Me.grbEliminarActividad.Controls.Add(Me.cboProyectosEliminarAcividad)
+        Me.grbEliminarActividad.Location = New System.Drawing.Point(1167, 472)
+        Me.grbEliminarActividad.Name = "grbEliminarActividad"
+        Me.grbEliminarActividad.Size = New System.Drawing.Size(332, 165)
+        Me.grbEliminarActividad.TabIndex = 48
+        Me.grbEliminarActividad.TabStop = False
+        Me.grbEliminarActividad.Text = "Eliminar Actividad"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1513, 649)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.grbEliminarActividad)
         Me.Controls.Add(Me.grbAñadirODSProyecto)
         Me.Controls.Add(Me.grbEliminarODS)
         Me.Controls.Add(Me.grbCrearActividad)
@@ -690,8 +690,8 @@ Partial Class Form1
         Me.grbCrearActividad.PerformLayout()
         Me.grbEliminarODS.ResumeLayout(False)
         Me.grbAñadirODSProyecto.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.grbEliminarActividad.ResumeLayout(False)
+        Me.grbEliminarActividad.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -754,5 +754,5 @@ Partial Class Form1
     Friend WithEvents Label16 As Label
     Friend WithEvents cboActividadesEliminar As ComboBox
     Friend WithEvents cboProyectosEliminarAcividad As ComboBox
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents grbEliminarActividad As GroupBox
 End Class
