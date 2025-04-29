@@ -26,7 +26,7 @@
     Public Overloads Function Equals(other As ODS) As Boolean Implements IEquatable(Of ODS).Equals
         Return other IsNot Nothing AndAlso
            IDODS = other.IDODS AndAlso
-           String.Equals(Nombre, other.Nombre, StringComparison.OrdinalIgnoreCase)
+           String.Equals(Nombre.ToUpper, other.Nombre.ToUpper, StringComparison.OrdinalIgnoreCase)
     End Function
 
     ' Método ToString 

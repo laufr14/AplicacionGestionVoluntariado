@@ -1,4 +1,6 @@
 ﻿Imports System.Data.Odbc
+Imports System.Diagnostics.Contracts
+Imports System.IO
 Imports Entidades
 Imports GestorProyecto
 Imports MisClases
@@ -6,23 +8,32 @@ Imports MisClases
 Public Class Form1
     Dim gestion As New GestionProyecto
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Not gestion.CargarFichero() Then
+            MessageBox.Show("Fallo en la lectura del fichero.txt")
+            Close()
+            Exit Sub
+        End If
         cboProyectosInfo.Items.AddRange(gestion.TodosProyectos().ToArray)
         cboProyectosModificarDescripcion.Items.AddRange(gestion.TodosProyectos().ToArray)
         cboProyectosAñadirAlumnoActividad.Items.AddRange(gestion.TodosProyectos().ToArray)
         cboProyectosCrearActividad.Items.AddRange(gestion.TodosProyectos().ToArray)
         cboProyectosAñadirODS.Items.AddRange(gestion.TodosProyectos().ToArray)
         cboProyectosEliminarODS.Items.AddRange(gestion.TodosProyectos().ToArray)
+        cboProyectosEliminarAcividad.Items.AddRange(gestion.TodosProyectos().ToArray)
         cboOrganizaciones.Items.AddRange(gestion.TodasOrganizaciones().ToArray)
         cboAlumnos.Items.AddRange(gestion.TodosAlumnos().ToArray)
         lsbAñadirODS.Items.AddRange(gestion.ListODS().ToArray)
+        btnInfoProyectos.PerformClick()
     End Sub
 
     Private Sub btnInfoProyectos_Click(sender As Object, e As EventArgs) Handles btnInfoProyectos.Click
+        dgv.DataSource = Nothing
         dgv.DataSource = gestion.TodosProyectos()
         lblInformacion.Text = "Información de todos los proyectos"
     End Sub
 
     Private Sub btnInfoProyectoSeleccionado_Click(sender As Object, e As EventArgs) Handles btnInfoProyectoSeleccionado.Click
+        dgv.DataSource = Nothing
         If cboProyectosInfo.SelectedItem Is Nothing Then
             MessageBox.Show("No se ha seleccionado ningún proyecto")
             Exit Sub
@@ -49,17 +60,17 @@ Public Class Form1
     End Sub
 
     Private Sub cboProyectosAñadirAlumnoActividad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboProyectosAñadirAlumnoActividad.SelectedIndexChanged
-        cboActividadesPorProyecto.Items.Clear()
+        cboActividadesAñadirAlumno.Items.Clear()
         Dim proySeleccionado As Proyecto = TryCast(cboProyectosAñadirAlumnoActividad.SelectedItem, Proyecto)
-        cboActividadesPorProyecto.Items.AddRange(gestion.ActividadPorProyecto(proySeleccionado.IDProyecto).ToArray)
+        cboActividadesAñadirAlumno.Items.AddRange(gestion.ActividadPorProyecto(proySeleccionado.IDProyecto).ToArray)
     End Sub
     Private Sub btnAñadirAlumnoActividad_Click(sender As Object, e As EventArgs) Handles btnAñadirAlumnoActividad.Click
-        If cboAlumnos.SelectedItem Is Nothing OrElse cboProyectosAñadirAlumnoActividad.SelectedItem Is Nothing OrElse cboActividadesPorProyecto.SelectedItem Is Nothing Then
+        If cboAlumnos.SelectedItem Is Nothing OrElse cboProyectosAñadirAlumnoActividad.SelectedItem Is Nothing OrElse cboActividadesAñadirAlumno.SelectedItem Is Nothing Then
             MessageBox.Show("Hay algún campo vacío")
             Exit Sub
         End If
         Dim alumnoSeleccionado As Alumno = TryCast(cboAlumnos.SelectedItem, Alumno)
-        Dim actSeleccionado As Actividad = TryCast(cboActividadesPorProyecto.SelectedItem, Actividad)
+        Dim actSeleccionado As Actividad = TryCast(cboActividadesAñadirAlumno.SelectedItem, Actividad)
 
         Dim dnis As List(Of String) = gestion.AlumnoPorActividad(actSeleccionado.IDActividad, actSeleccionado.IDProyecto)
         Dim alumnos As New List(Of Alumno)
@@ -93,10 +104,16 @@ Public Class Form1
             Exit Sub
         End If
 
+        For Each p In gestion.TodosProyectos
+            If p.Nombre_Proyecto.ToLower = txtNombreProyecto.Text.ToLower Then
+                MessageBox.Show("Ya existe un proyecto con el mismo nombre")
+                Exit Sub
+            End If
+        Next
+
         Dim nuevoId As Integer = 1
         For Each p In gestion.TodosProyectos()
-            nuevoId = 1
-            nuevoId += p.IDProyecto
+            nuevoId = p.IDProyecto + 1
         Next
 
         Dim orgSeleccionada As Organizacion = TryCast(cboOrganizaciones.SelectedItem, Organizacion)
@@ -120,6 +137,7 @@ Public Class Form1
             Else
                 MessageBox.Show("Ha habido algún error creando el nuevo proyecto")
             End If
+            ActualizarProyectos()
             Exit Sub
         End If
 
@@ -128,6 +146,22 @@ Public Class Form1
         Else
             MessageBox.Show("Ha habido algún error creando el nuevo proyecto")
         End If
+        ActualizarProyectos()
+    End Sub
+
+    Private Sub ActualizarProyectos()
+        cboProyectosInfo.Items.Clear()
+        cboProyectosModificarDescripcion.Items.Clear()
+        cboProyectosAñadirAlumnoActividad.Items.Clear()
+        cboProyectosCrearActividad.Items.Clear()
+        cboProyectosAñadirODS.Items.Clear()
+        cboProyectosEliminarODS.Items.Clear()
+        cboProyectosInfo.Items.AddRange(gestion.TodosProyectos().ToArray)
+        cboProyectosModificarDescripcion.Items.AddRange(gestion.TodosProyectos().ToArray)
+        cboProyectosAñadirAlumnoActividad.Items.AddRange(gestion.TodosProyectos().ToArray)
+        cboProyectosCrearActividad.Items.AddRange(gestion.TodosProyectos().ToArray)
+        cboProyectosAñadirODS.Items.AddRange(gestion.TodosProyectos().ToArray)
+        cboProyectosEliminarODS.Items.AddRange(gestion.TodosProyectos().ToArray)
     End Sub
 
     Private Sub btnNuevaActividad_Click(sender As Object, e As EventArgs) Handles btnNuevaActividad.Click
@@ -145,21 +179,36 @@ Public Class Form1
 
         Dim proyectoSeleccionado As Proyecto = TryCast(cboProyectosCrearActividad.SelectedItem, Proyecto)
 
+        Dim actividades As List(Of Actividad) = gestion.ActividadPorProyecto(proyectoSeleccionado.IDProyecto)
+
+        For Each a In gestion.ActividadPorProyecto(proyectoSeleccionado.IDProyecto)
+            If a.Nombre.ToLower = txtNombreNuevaActividad.Text.ToLower Then
+                MessageBox.Show("Ya existe una actividad con el mismo nombre")
+                Exit Sub
+            End If
+        Next
+
+
+
+
         Dim nuevoId As Integer = 1
         For Each a In gestion.ActividadPorProyecto(proyectoSeleccionado.IDProyecto)
-            nuevoId = 1
-            nuevoId += a.IDActividad
+            nuevoId = a.IDActividad + 1
         Next
 
         Dim fechainicio As Date = dtFechaInicioActividad.Text
 
-        If dtFechaFinActividad.Checked Then
+        If fechainicio < proyectoSeleccionado.Fecha_Inicio Then
+            MessageBox.Show("La actividad no puede empezar antes que el proyecto")
+            Exit Sub
+        End If
 
+        If dtFechaFinActividad.Checked Then
             Dim fechaFin As Date = dtFechaFinActividad.Text
             If fechaFin < fechainicio Then
                 MessageBox.Show("La fecha fin no puede ser anterior a la fecha inicio")
                 Exit Sub
-            ElseIf proyectoSeleccionado.Fecha_Inicio > fechainicio OrElse proyectoSeleccionado.Fecha_Fin < fechaFin Then
+            ElseIf proyectoSeleccionado.Fecha_Fin < fechaFin AndAlso proyectoSeleccionado.Fecha_Fin <> Date.MinValue Then
                 MessageBox.Show("La fechas de las actividades deben estar dentro de los margenes del proyecto")
                 Exit Sub
             End If
@@ -178,7 +227,18 @@ Public Class Form1
     End Sub
 
     Private Sub btnAñadirODSProyecto_Click(sender As Object, e As EventArgs) Handles btnAñadirODSProyecto.Click
+        If cboProyectosAñadirODS.SelectedItem Is Nothing Then
+            MessageBox.Show("No se ha seleccionado ningún proyecto")
+            Exit Sub
+        End If
+
         Dim a As ListBox.SelectedObjectCollection = lsbAñadirODS.SelectedItems
+
+        If a.Count = 0 Then
+            MessageBox.Show("No se ha seleccionado ninguna ODS")
+            Exit Sub
+        End If
+
         Dim lista As New List(Of ODS)
         For i = 0 To a.Count - 1
             lista.Add(a(i))
@@ -189,8 +249,12 @@ Public Class Form1
         Next
         Dim proyectoSeleccionado As Proyecto = TryCast(cboProyectosAñadirODS.SelectedItem, Proyecto)
 
-
-        gestion.AñadirODSAProyecto(proyectoSeleccionado.IDProyecto, listaInt)
+        If gestion.AñadirODSAProyecto(proyectoSeleccionado.IDProyecto, listaInt) Then
+            MessageBox.Show("Se ha añadido correctamente")
+        Else
+            MessageBox.Show("No se ha podido añadir nada")
+            Exit Sub
+        End If
         lsbAñadirODS.Refresh()
         cboProyectosAñadirODS.Text = ""
         lsbAñadirODS.Items.Clear()
@@ -198,14 +262,29 @@ Public Class Form1
     End Sub
 
     Private Sub btnBuscarODSProyecto_Click(sender As Object, e As EventArgs) Handles btnBuscarODSProyecto.Click
+        If cboProyectosEliminarODS.SelectedItem Is Nothing Then
+            MessageBox.Show("No se ha seleccionado ningún proyecto")
+            Exit Sub
+        End If
         Dim proyectoSeleccionado As Proyecto = TryCast(cboProyectosEliminarODS.SelectedItem, Proyecto)
         lsbEliminarODS.Items.Clear()
         lsbEliminarODS.Items.AddRange(gestion.BuscarODSPorProyecto(proyectoSeleccionado.IDProyecto).ToArray)
-
+        If gestion.BuscarODSPorProyecto(proyectoSeleccionado.IDProyecto).Count = 0 Then MessageBox.Show("No había ninguna ODS en este proyecto")
     End Sub
 
     Private Sub btnEliminarODSProyecto_Click(sender As Object, e As EventArgs) Handles btnEliminarODSProyecto.Click
+        If cboProyectosEliminarODS.SelectedItem Is Nothing Then
+            MessageBox.Show("No se ha seleccionado ningún proyecto")
+            Exit Sub
+        End If
+
         Dim a As ListBox.SelectedObjectCollection = lsbEliminarODS.SelectedItems
+
+        If a.Count = 0 Then
+            MessageBox.Show("No se ha seleccionado ninguna ODS")
+            Exit Sub
+        End If
+
         Dim lista As List(Of ODS) = New List(Of ODS)
         For i = 0 To a.Count - 1
             lista.Add(a(i))
@@ -215,11 +294,36 @@ Public Class Form1
             listaInt.Add(item.IDODS)
         Next
         Dim proyectoSeleccionado As Proyecto = TryCast(cboProyectosEliminarODS.SelectedItem, Proyecto)
-        gestion.BorrarODSAProyecto(proyectoSeleccionado.IDProyecto, listaInt)
-        MessageBox.Show($"Se han eliminado los ODS seleccionados del proyecto  {proyectoSeleccionado.Nombre_Proyecto}")
+        If Not gestion.BorrarODSAProyecto(proyectoSeleccionado.IDProyecto, listaInt) Then
+            MessageBox.Show("Algo ha salido mal")
+            Exit Sub
+        End If
+        MessageBox.Show($"Se han eliminado los ODS seleccionados del proyecto {proyectoSeleccionado.Nombre_Proyecto}")
         lsbEliminarODS.Items.Clear()
         lsbEliminarODS.Items.AddRange(gestion.BuscarODSPorProyecto(proyectoSeleccionado.IDProyecto).ToArray)
     End Sub
 
+    Private Sub cboProyectosEliminarAcividad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboProyectosEliminarAcividad.SelectedIndexChanged
+        cboActividadesEliminar.Items.Clear()
+        Dim proySeleccionado As Proyecto = TryCast(cboProyectosEliminarAcividad.SelectedItem, Proyecto)
+        cboActividadesEliminar.Items.AddRange(gestion.ActividadPorProyecto(proySeleccionado.IDProyecto).ToArray)
+    End Sub
 
+    Private Sub btnEliminarActividad_Click(sender As Object, e As EventArgs) Handles btnEliminarActividad.Click
+        If cboProyectosEliminarAcividad.SelectedItem Is Nothing Then
+            MessageBox.Show("No se ha seleccionado ningún proyecto")
+            Exit Sub
+        ElseIf cboActividadesEliminar.SelectedItem Is Nothing Then
+            MessageBox.Show("No se ha seleccionado ninguna actividad")
+            Exit Sub
+        End If
+
+        Dim actSeleccionada As Actividad = TryCast(cboActividadesEliminar.SelectedItem, Actividad)
+
+        If gestion.EliminarActividad(actSeleccionada.IDProyecto, actSeleccionada.IDActividad) Then
+            MessageBox.Show("Se ha eliminado la actividad correctamente")
+        Else
+            MessageBox.Show("No se ha podido eliminar la actividad")
+        End If
+    End Sub
 End Class

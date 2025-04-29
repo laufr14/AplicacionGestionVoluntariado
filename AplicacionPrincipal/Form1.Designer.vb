@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.dgv = New System.Windows.Forms.DataGridView()
         Me.lblInformacion = New System.Windows.Forms.Label()
@@ -40,9 +40,9 @@ Partial Class Form1
         Me.cboOrganizaciones = New System.Windows.Forms.ComboBox()
         Me.cboProyectosAñadirAlumnoActividad = New System.Windows.Forms.ComboBox()
         Me.cboAlumnos = New System.Windows.Forms.ComboBox()
-        Me.cboActividadesPorProyecto = New System.Windows.Forms.ComboBox()
+        Me.cboActividadesAñadirAlumno = New System.Windows.Forms.ComboBox()
         Me.cboProyectosModificarDescripcion = New System.Windows.Forms.ComboBox()
-        Me.grbInfoProyecto = New System.Windows.Forms.GroupBox()
+        Me.grbActividadesDeProyecto = New System.Windows.Forms.GroupBox()
         Me.grbModificarDescripcionProyecto = New System.Windows.Forms.GroupBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -75,14 +75,21 @@ Partial Class Form1
         Me.lsbEliminarODS = New System.Windows.Forms.ListBox()
         Me.grbEliminarODS = New System.Windows.Forms.GroupBox()
         Me.grbAñadirODSProyecto = New System.Windows.Forms.GroupBox()
+        Me.btnEliminarActividad = New System.Windows.Forms.Button()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.cboActividadesEliminar = New System.Windows.Forms.ComboBox()
+        Me.cboProyectosEliminarAcividad = New System.Windows.Forms.ComboBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grbInfoProyecto.SuspendLayout()
+        Me.grbActividadesDeProyecto.SuspendLayout()
         Me.grbModificarDescripcionProyecto.SuspendLayout()
         Me.grbAñadirAlumnoActividad.SuspendLayout()
         Me.grbNuevoProyecto.SuspendLayout()
         Me.grbCrearActividad.SuspendLayout()
         Me.grbEliminarODS.SuspendLayout()
         Me.grbAñadirODSProyecto.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'dgv
@@ -167,37 +174,38 @@ Partial Class Form1
         '
         'btnNuevoProyecto
         '
-        Me.btnNuevoProyecto.Location = New System.Drawing.Point(0, 257)
+        Me.btnNuevoProyecto.Location = New System.Drawing.Point(0, 250)
         Me.btnNuevoProyecto.Name = "btnNuevoProyecto"
-        Me.btnNuevoProyecto.Size = New System.Drawing.Size(158, 25)
+        Me.btnNuevoProyecto.Size = New System.Drawing.Size(158, 32)
         Me.btnNuevoProyecto.TabIndex = 12
         Me.btnNuevoProyecto.Text = "Nuevo Proyecto"
         Me.btnNuevoProyecto.UseVisualStyleBackColor = True
         '
         'btnInfoProyectos
         '
-        Me.btnInfoProyectos.Location = New System.Drawing.Point(1221, 243)
+        Me.btnInfoProyectos.Location = New System.Drawing.Point(1221, 241)
         Me.btnInfoProyectos.Name = "btnInfoProyectos"
-        Me.btnInfoProyectos.Size = New System.Drawing.Size(280, 23)
+        Me.btnInfoProyectos.Size = New System.Drawing.Size(280, 35)
         Me.btnInfoProyectos.TabIndex = 13
         Me.btnInfoProyectos.Text = "Ver información de todos los proyectos"
         Me.btnInfoProyectos.UseVisualStyleBackColor = True
         '
         'cboProyectosInfo
         '
+        Me.cboProyectosInfo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboProyectosInfo.FormattingEnabled = True
-        Me.cboProyectosInfo.Location = New System.Drawing.Point(17, 37)
+        Me.cboProyectosInfo.Location = New System.Drawing.Point(17, 26)
         Me.cboProyectosInfo.Name = "cboProyectosInfo"
         Me.cboProyectosInfo.Size = New System.Drawing.Size(249, 24)
         Me.cboProyectosInfo.TabIndex = 14
         '
         'btnInfoProyectoSeleccionado
         '
-        Me.btnInfoProyectoSeleccionado.Location = New System.Drawing.Point(17, 67)
+        Me.btnInfoProyectoSeleccionado.Location = New System.Drawing.Point(17, 56)
         Me.btnInfoProyectoSeleccionado.Name = "btnInfoProyectoSeleccionado"
-        Me.btnInfoProyectoSeleccionado.Size = New System.Drawing.Size(203, 23)
+        Me.btnInfoProyectoSeleccionado.Size = New System.Drawing.Size(203, 34)
         Me.btnInfoProyectoSeleccionado.TabIndex = 15
-        Me.btnInfoProyectoSeleccionado.Text = "Ver información del proyecto"
+        Me.btnInfoProyectoSeleccionado.Text = "Ver actividades del proyecto"
         Me.btnInfoProyectoSeleccionado.UseVisualStyleBackColor = True
         '
         'txtNuevaDescripcion
@@ -212,13 +220,14 @@ Partial Class Form1
         '
         Me.btnModificarDescripcion.Location = New System.Drawing.Point(11, 135)
         Me.btnModificarDescripcion.Name = "btnModificarDescripcion"
-        Me.btnModificarDescripcion.Size = New System.Drawing.Size(270, 23)
+        Me.btnModificarDescripcion.Size = New System.Drawing.Size(270, 27)
         Me.btnModificarDescripcion.TabIndex = 17
         Me.btnModificarDescripcion.Text = "Modificar descripción del proyecto"
         Me.btnModificarDescripcion.UseVisualStyleBackColor = True
         '
         'cboOrganizaciones
         '
+        Me.cboOrganizaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboOrganizaciones.FormattingEnabled = True
         Me.cboOrganizaciones.Location = New System.Drawing.Point(164, 155)
         Me.cboOrganizaciones.Name = "cboOrganizaciones"
@@ -227,6 +236,7 @@ Partial Class Form1
         '
         'cboProyectosAñadirAlumnoActividad
         '
+        Me.cboProyectosAñadirAlumnoActividad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboProyectosAñadirAlumnoActividad.FormattingEnabled = True
         Me.cboProyectosAñadirAlumnoActividad.Location = New System.Drawing.Point(104, 65)
         Me.cboProyectosAñadirAlumnoActividad.Name = "cboProyectosAñadirAlumnoActividad"
@@ -235,38 +245,41 @@ Partial Class Form1
         '
         'cboAlumnos
         '
+        Me.cboAlumnos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAlumnos.FormattingEnabled = True
         Me.cboAlumnos.Location = New System.Drawing.Point(104, 25)
         Me.cboAlumnos.Name = "cboAlumnos"
         Me.cboAlumnos.Size = New System.Drawing.Size(209, 24)
         Me.cboAlumnos.TabIndex = 20
         '
-        'cboActividadesPorProyecto
+        'cboActividadesAñadirAlumno
         '
-        Me.cboActividadesPorProyecto.FormattingEnabled = True
-        Me.cboActividadesPorProyecto.Location = New System.Drawing.Point(104, 105)
-        Me.cboActividadesPorProyecto.Name = "cboActividadesPorProyecto"
-        Me.cboActividadesPorProyecto.Size = New System.Drawing.Size(209, 24)
-        Me.cboActividadesPorProyecto.TabIndex = 21
+        Me.cboActividadesAñadirAlumno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboActividadesAñadirAlumno.FormattingEnabled = True
+        Me.cboActividadesAñadirAlumno.Location = New System.Drawing.Point(104, 105)
+        Me.cboActividadesAñadirAlumno.Name = "cboActividadesAñadirAlumno"
+        Me.cboActividadesAñadirAlumno.Size = New System.Drawing.Size(209, 24)
+        Me.cboActividadesAñadirAlumno.TabIndex = 21
         '
         'cboProyectosModificarDescripcion
         '
+        Me.cboProyectosModificarDescripcion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboProyectosModificarDescripcion.FormattingEnabled = True
         Me.cboProyectosModificarDescripcion.Location = New System.Drawing.Point(11, 22)
         Me.cboProyectosModificarDescripcion.Name = "cboProyectosModificarDescripcion"
         Me.cboProyectosModificarDescripcion.Size = New System.Drawing.Size(270, 24)
         Me.cboProyectosModificarDescripcion.TabIndex = 22
         '
-        'grbInfoProyecto
+        'grbActividadesDeProyecto
         '
-        Me.grbInfoProyecto.Controls.Add(Me.btnInfoProyectoSeleccionado)
-        Me.grbInfoProyecto.Controls.Add(Me.cboProyectosInfo)
-        Me.grbInfoProyecto.Location = New System.Drawing.Point(912, 239)
-        Me.grbInfoProyecto.Name = "grbInfoProyecto"
-        Me.grbInfoProyecto.Size = New System.Drawing.Size(282, 99)
-        Me.grbInfoProyecto.TabIndex = 23
-        Me.grbInfoProyecto.TabStop = False
-        Me.grbInfoProyecto.Text = "Información de proyecto"
+        Me.grbActividadesDeProyecto.Controls.Add(Me.btnInfoProyectoSeleccionado)
+        Me.grbActividadesDeProyecto.Controls.Add(Me.cboProyectosInfo)
+        Me.grbActividadesDeProyecto.Location = New System.Drawing.Point(877, 239)
+        Me.grbActividadesDeProyecto.Name = "grbActividadesDeProyecto"
+        Me.grbActividadesDeProyecto.Size = New System.Drawing.Size(282, 99)
+        Me.grbActividadesDeProyecto.TabIndex = 23
+        Me.grbActividadesDeProyecto.TabStop = False
+        Me.grbActividadesDeProyecto.Text = "Actividades de un proyecto"
         '
         'grbModificarDescripcionProyecto
         '
@@ -309,9 +322,9 @@ Partial Class Form1
         '
         'btnAñadirAlumnoActividad
         '
-        Me.btnAñadirAlumnoActividad.Location = New System.Drawing.Point(87, 145)
+        Me.btnAñadirAlumnoActividad.Location = New System.Drawing.Point(87, 135)
         Me.btnAñadirAlumnoActividad.Name = "btnAñadirAlumnoActividad"
-        Me.btnAñadirAlumnoActividad.Size = New System.Drawing.Size(226, 23)
+        Me.btnAñadirAlumnoActividad.Size = New System.Drawing.Size(226, 34)
         Me.btnAñadirAlumnoActividad.TabIndex = 28
         Me.btnAñadirAlumnoActividad.Text = "Añadir alumno a actividad"
         Me.btnAñadirAlumnoActividad.UseVisualStyleBackColor = True
@@ -322,10 +335,10 @@ Partial Class Form1
         Me.grbAñadirAlumnoActividad.Controls.Add(Me.Label8)
         Me.grbAñadirAlumnoActividad.Controls.Add(Me.Label7)
         Me.grbAñadirAlumnoActividad.Controls.Add(Me.Label6)
-        Me.grbAñadirAlumnoActividad.Controls.Add(Me.cboActividadesPorProyecto)
+        Me.grbAñadirAlumnoActividad.Controls.Add(Me.cboActividadesAñadirAlumno)
         Me.grbAñadirAlumnoActividad.Controls.Add(Me.cboAlumnos)
         Me.grbAñadirAlumnoActividad.Controls.Add(Me.cboProyectosAñadirAlumnoActividad)
-        Me.grbAñadirAlumnoActividad.Location = New System.Drawing.Point(865, 348)
+        Me.grbAñadirAlumnoActividad.Location = New System.Drawing.Point(815, 367)
         Me.grbAñadirAlumnoActividad.Name = "grbAñadirAlumnoActividad"
         Me.grbAñadirAlumnoActividad.Size = New System.Drawing.Size(328, 173)
         Me.grbAñadirAlumnoActividad.TabIndex = 29
@@ -414,6 +427,7 @@ Partial Class Form1
         '
         'cboProyectosCrearActividad
         '
+        Me.cboProyectosCrearActividad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboProyectosCrearActividad.FormattingEnabled = True
         Me.cboProyectosCrearActividad.Location = New System.Drawing.Point(164, 33)
         Me.cboProyectosCrearActividad.Name = "cboProyectosCrearActividad"
@@ -437,9 +451,9 @@ Partial Class Form1
         '
         'btnNuevaActividad
         '
-        Me.btnNuevaActividad.Location = New System.Drawing.Point(0, 287)
+        Me.btnNuevaActividad.Location = New System.Drawing.Point(0, 274)
         Me.btnNuevaActividad.Name = "btnNuevaActividad"
-        Me.btnNuevaActividad.Size = New System.Drawing.Size(158, 25)
+        Me.btnNuevaActividad.Size = New System.Drawing.Size(158, 38)
         Me.btnNuevaActividad.TabIndex = 12
         Me.btnNuevaActividad.Text = "Nueva Actividad"
         Me.btnNuevaActividad.UseVisualStyleBackColor = True
@@ -499,6 +513,7 @@ Partial Class Form1
         '
         'cboProyectosAñadirODS
         '
+        Me.cboProyectosAñadirODS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboProyectosAñadirODS.FormattingEnabled = True
         Me.cboProyectosAñadirODS.Location = New System.Drawing.Point(16, 21)
         Me.cboProyectosAñadirODS.Name = "cboProyectosAñadirODS"
@@ -507,6 +522,7 @@ Partial Class Form1
         '
         'cboProyectosEliminarODS
         '
+        Me.cboProyectosEliminarODS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboProyectosEliminarODS.FormattingEnabled = True
         Me.cboProyectosEliminarODS.Location = New System.Drawing.Point(19, 31)
         Me.cboProyectosEliminarODS.Name = "cboProyectosEliminarODS"
@@ -517,25 +533,25 @@ Partial Class Form1
         '
         Me.btnAñadirODSProyecto.Location = New System.Drawing.Point(16, 58)
         Me.btnAñadirODSProyecto.Name = "btnAñadirODSProyecto"
-        Me.btnAñadirODSProyecto.Size = New System.Drawing.Size(293, 23)
+        Me.btnAñadirODSProyecto.Size = New System.Drawing.Size(293, 31)
         Me.btnAñadirODSProyecto.TabIndex = 36
         Me.btnAñadirODSProyecto.Text = "Añadir ODS a proyecto"
         Me.btnAñadirODSProyecto.UseVisualStyleBackColor = True
         '
         'btnBuscarODSProyecto
         '
-        Me.btnBuscarODSProyecto.Location = New System.Drawing.Point(19, 68)
+        Me.btnBuscarODSProyecto.Location = New System.Drawing.Point(19, 66)
         Me.btnBuscarODSProyecto.Name = "btnBuscarODSProyecto"
-        Me.btnBuscarODSProyecto.Size = New System.Drawing.Size(276, 23)
+        Me.btnBuscarODSProyecto.Size = New System.Drawing.Size(276, 29)
         Me.btnBuscarODSProyecto.TabIndex = 37
         Me.btnBuscarODSProyecto.Text = "Buscar ODSs del proyecto"
         Me.btnBuscarODSProyecto.UseVisualStyleBackColor = True
         '
         'btnEliminarODSProyecto
         '
-        Me.btnEliminarODSProyecto.Location = New System.Drawing.Point(19, 103)
+        Me.btnEliminarODSProyecto.Location = New System.Drawing.Point(19, 101)
         Me.btnEliminarODSProyecto.Name = "btnEliminarODSProyecto"
-        Me.btnEliminarODSProyecto.Size = New System.Drawing.Size(276, 22)
+        Me.btnEliminarODSProyecto.Size = New System.Drawing.Size(276, 32)
         Me.btnEliminarODSProyecto.TabIndex = 38
         Me.btnEliminarODSProyecto.Text = "Eliminar ODS de proyecto"
         Me.btnEliminarODSProyecto.UseVisualStyleBackColor = True
@@ -585,25 +601,85 @@ Partial Class Form1
         Me.grbAñadirODSProyecto.TabStop = False
         Me.grbAñadirODSProyecto.Text = "Añadir ODS a proyecto"
         '
+        'btnEliminarActividad
+        '
+        Me.btnEliminarActividad.Location = New System.Drawing.Point(105, 108)
+        Me.btnEliminarActividad.Name = "btnEliminarActividad"
+        Me.btnEliminarActividad.Size = New System.Drawing.Size(209, 34)
+        Me.btnEliminarActividad.TabIndex = 47
+        Me.btnEliminarActividad.Text = "Eliminar actividad"
+        Me.btnEliminarActividad.UseVisualStyleBackColor = True
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(10, 75)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(78, 16)
+        Me.Label15.TabIndex = 46
+        Me.Label15.Text = "Actividades"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(10, 35)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(68, 16)
+        Me.Label16.TabIndex = 45
+        Me.Label16.Text = "Proyectos"
+        '
+        'cboActividadesEliminar
+        '
+        Me.cboActividadesEliminar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboActividadesEliminar.FormattingEnabled = True
+        Me.cboActividadesEliminar.Location = New System.Drawing.Point(105, 75)
+        Me.cboActividadesEliminar.Name = "cboActividadesEliminar"
+        Me.cboActividadesEliminar.Size = New System.Drawing.Size(209, 24)
+        Me.cboActividadesEliminar.TabIndex = 44
+        '
+        'cboProyectosEliminarAcividad
+        '
+        Me.cboProyectosEliminarAcividad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboProyectosEliminarAcividad.FormattingEnabled = True
+        Me.cboProyectosEliminarAcividad.Location = New System.Drawing.Point(105, 35)
+        Me.cboProyectosEliminarAcividad.Name = "cboProyectosEliminarAcividad"
+        Me.cboProyectosEliminarAcividad.Size = New System.Drawing.Size(209, 24)
+        Me.cboProyectosEliminarAcividad.TabIndex = 43
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnEliminarActividad)
+        Me.GroupBox1.Controls.Add(Me.Label15)
+        Me.GroupBox1.Controls.Add(Me.Label16)
+        Me.GroupBox1.Controls.Add(Me.cboActividadesEliminar)
+        Me.GroupBox1.Controls.Add(Me.cboProyectosEliminarAcividad)
+        Me.GroupBox1.Location = New System.Drawing.Point(1167, 472)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(332, 165)
+        Me.GroupBox1.TabIndex = 48
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "GroupBox1"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1513, 649)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.grbAñadirODSProyecto)
         Me.Controls.Add(Me.grbEliminarODS)
         Me.Controls.Add(Me.grbCrearActividad)
         Me.Controls.Add(Me.grbNuevoProyecto)
         Me.Controls.Add(Me.grbAñadirAlumnoActividad)
         Me.Controls.Add(Me.grbModificarDescripcionProyecto)
-        Me.Controls.Add(Me.grbInfoProyecto)
+        Me.Controls.Add(Me.grbActividadesDeProyecto)
         Me.Controls.Add(Me.btnInfoProyectos)
         Me.Controls.Add(Me.lblInformacion)
         Me.Controls.Add(Me.dgv)
         Me.Name = "Form1"
         Me.Text = "Aplicación para la gestión del voluntariado cuatrovientos"
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.grbInfoProyecto.ResumeLayout(False)
+        Me.grbActividadesDeProyecto.ResumeLayout(False)
         Me.grbModificarDescripcionProyecto.ResumeLayout(False)
         Me.grbModificarDescripcionProyecto.PerformLayout()
         Me.grbAñadirAlumnoActividad.ResumeLayout(False)
@@ -614,6 +690,8 @@ Partial Class Form1
         Me.grbCrearActividad.PerformLayout()
         Me.grbEliminarODS.ResumeLayout(False)
         Me.grbAñadirODSProyecto.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -636,9 +714,9 @@ Partial Class Form1
     Friend WithEvents cboOrganizaciones As ComboBox
     Friend WithEvents cboProyectosAñadirAlumnoActividad As ComboBox
     Friend WithEvents cboAlumnos As ComboBox
-    Friend WithEvents cboActividadesPorProyecto As ComboBox
+    Friend WithEvents cboActividadesAñadirAlumno As ComboBox
     Friend WithEvents cboProyectosModificarDescripcion As ComboBox
-    Friend WithEvents grbInfoProyecto As GroupBox
+    Friend WithEvents grbActividadesDeProyecto As GroupBox
     Friend WithEvents grbModificarDescripcionProyecto As GroupBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
@@ -671,4 +749,10 @@ Partial Class Form1
     Friend WithEvents lsbEliminarODS As ListBox
     Friend WithEvents grbEliminarODS As GroupBox
     Friend WithEvents grbAñadirODSProyecto As GroupBox
+    Friend WithEvents btnEliminarActividad As Button
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents cboActividadesEliminar As ComboBox
+    Friend WithEvents cboProyectosEliminarAcividad As ComboBox
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

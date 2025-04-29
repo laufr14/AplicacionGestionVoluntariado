@@ -1,9 +1,18 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
 Imports Entidades
 
 Public Class GestionProyecto
-    Private servidor As String = "DESKTOP-EAOLBSJ"
-    Private cadenaConexion As String = $"Data Source = {servidor}; Initial Catalog = DATABASEVOLUNTARIADO; Integrated Security = SSPI; MultipleActiveResultSets=true"
+    Private servidor As String
+    Private cadenaConexion As String
+
+    Public Function CargarFichero() As Boolean
+        If Not File.Exists("servidor.txt") Then Return False
+        Dim leerFichero() As String = File.ReadAllLines("servidor.txt")
+        servidor = leerFichero(0)
+        cadenaConexion = $"Data Source = {servidor}; Initial Catalog = DATABASEVOLUNTARIADO; Integrated Security = SSPI; MultipleActiveResultSets=true"
+        Return True
+    End Function
 
     Public Function TodosProyectos() As List(Of Proyecto)
         Dim conexion As New SqlConnection(cadenaConexion)
@@ -13,12 +22,19 @@ Public Class GestionProyecto
         Dim cmdProyectos As New SqlCommand(consultaSQL, conexion)
         Dim drProyectos As SqlDataReader = cmdProyectos.ExecuteReader
         Dim proyectos As New List(Of Proyecto)
+        Dim estado As String = ""
         While drProyectos.Read
-            'If drProyectos("fecha_fin") Is Nothing Then
-            '    proyectos.Add(New Proyecto(drProyectos("idproyecto"), drProyectos("nombre_proyecto"), drProyectos("descripcion"), drProyectos("fecha_inicio"), drProyectos("estado"), drProyectos("idorganizacion")))
-            'Else
-            proyectos.Add(New Proyecto(drProyectos("idproyecto"), drProyectos("nombre_proyecto"), drProyectos("descripcion"), drProyectos("fecha_inicio"), drProyectos("fecha_fin"), drProyectos("estado"), drProyectos("idorganizacion")))
-            'End If
+            If drProyectos("estado") = "TRUE" Then
+                estado = "ACTIVO"
+            Else
+                If drProyectos("fecha_inicio") > Now() Then estado = "PENDIENTE"
+                If drProyectos("fecha_inicio") < Now() Then estado = "TERMINADO"
+            End If
+            If IsDBNull(drProyectos("fecha_fin")) Then
+                proyectos.Add(New Proyecto(drProyectos("idproyecto"), drProyectos("nombre_proyecto"), drProyectos("descripcion"), drProyectos("fecha_inicio"), estado, drProyectos("idorganizacion")))
+            Else
+                proyectos.Add(New Proyecto(drProyectos("idproyecto"), drProyectos("nombre_proyecto"), drProyectos("descripcion"), drProyectos("fecha_inicio"), drProyectos("fecha_fin"), estado, drProyectos("idorganizacion")))
+            End If
         End While
         conexion.Close()
         Return proyectos
@@ -91,7 +107,11 @@ Public Class GestionProyecto
         Dim actividades As New List(Of Actividad)
 
         While drActividades.Read
-            actividades.Add(New Actividad(drActividades("idproyecto"), drActividades("idactividad"), drActividades("nombre"), drActividades("descripcion"), drActividades("fecha_inicio"), drActividades("fecha_fin"), drActividades("ubicacion")))
+            If IsDBNull(drActividades("fecha_inicio")) Then
+                actividades.Add(New Actividad(drActividades("idproyecto"), drActividades("idactividad"), drActividades("nombre"), drActividades("descripcion"), drActividades("fecha_inicio"), drActividades("ubicacion")))
+            Else
+                actividades.Add(New Actividad(drActividades("idproyecto"), drActividades("idactividad"), drActividades("nombre"), drActividades("descripcion"), drActividades("fecha_inicio"), drActividades("fecha_fin"), drActividades("ubicacion")))
+            End If
         End While
         conexion.Close()
         Return actividades
@@ -143,7 +163,7 @@ Public Class GestionProyecto
     Public Function NuevaActividad(idProyecto As Integer, idActividad As Integer, nombre As String, descripcion As String, ubicacion As String, fechaInicio As Date, fecha_fin As Date) As Boolean
         Dim conexion As New SqlConnection(cadenaConexion)
         conexion.Open()
-        Dim consultaSQL As String = "Insert into ACTIVIDADES values (" & idProyecto & ", " & idActividad & ", '" & nombre & "','" & descripcion & "','" & ubicacion & "','" & fechaInicio.Year & "-" & fechaInicio.Day & "-" & fechaInicio.Month & "', '" & fecha_fin.Year & "-" & fecha_fin.Day & "-" & fecha_fin.Month & "')"
+        Dim consultaSQL As String = "EXEC AñadirActividad " & idProyecto & ", " & idActividad & ", '" & nombre & "','" & descripcion & "','" & ubicacion & "','" & fechaInicio.Year & "-" & fechaInicio.Day & "-" & fechaInicio.Month & "', '" & fecha_fin.Year & "-" & fecha_fin.Day & "-" & fecha_fin.Month & "'"
         Dim cmd As New SqlCommand(consultaSQL, conexion)
         Dim filasAfectadas = cmd.ExecuteNonQuery()
         conexion.Close()
@@ -153,7 +173,7 @@ Public Class GestionProyecto
     Public Function NuevaActividad(idProyecto As Integer, idActividad As Integer, nombre As String, descripcion As String, ubicacion As String, fechaInicio As Date) As Boolean
         Dim conexion As New SqlConnection(cadenaConexion)
         conexion.Open()
-        Dim consultaSQL As String = "Insert into ACTIVIDADES values (" & idProyecto & ", " & idActividad & ", '" & nombre & "','" & descripcion & "','" & ubicacion & "','" & fechaInicio.Year & "-" & fechaInicio.Day & "-" & fechaInicio.Month & "')"
+        Dim consultaSQL As String = "Insert into ACTIVIDADES (idproyecto, idactividad, nombre, descripcion, ubicacion, fecha_inicio) values (" & idProyecto & ", " & idActividad & ", '" & nombre & "','" & descripcion & "','" & ubicacion & "','" & fechaInicio.Year & "-" & fechaInicio.Day & "-" & fechaInicio.Month & "')"
         Dim cmd As New SqlCommand(consultaSQL, conexion)
         Dim filasAfectadas = cmd.ExecuteNonQuery()
         conexion.Close()
@@ -165,8 +185,22 @@ Public Class GestionProyecto
         Dim conexion As New SqlConnection(cadenaConexion)
         conexion.Open()
         Dim filasAfectadas As Integer = 0
+        Dim consultaSelectSQL As String = $"SELECT PROYECTO_ODS.IDODS FROM PROYECTO_ODS WHERE IDPROYECTO={idProyecto}"
+        Dim cmdSelect As New SqlCommand(consultaSelectSQL, conexion)
+        Dim drSelect As SqlDataReader = cmdSelect.ExecuteReader
+        Dim listaOdsExistentes As New List(Of Integer)
+        While drSelect.Read
+            listaOdsExistentes.Add(drSelect("idods"))
+        End While
+        For Each ODS As Integer In listaOdsExistentes
+            If listaOds.Contains(ODS) Then
+                listaOds.Remove(ODS)
+
+            End If
+        Next
+
         For Each idODS As Integer In listaOds
-            Dim consultaSQL As String = "Insert into Proyecto_ODS (idproyecto, idods) values ('" & idProyecto & "', '" & idODS & "')"
+            Dim consultaSQL As String = "Insert into Proyecto_ODS values ('" & idProyecto & "', '" & idODS & "')"
             Dim cmdDescripcion As New SqlCommand(consultaSQL, conexion)
             filasAfectadas = cmdDescripcion.ExecuteNonQuery()
         Next
@@ -193,8 +227,7 @@ Public Class GestionProyecto
         conexion.Open()
         Dim consultaSQL As String = $"SELECT ODS.*
               FROM ODS INNER JOIN PROYECTO_ODS ON ODS.IDODS = PROYECTO_ODS.IDODS
-              INNER JOIN PROYECTOS ON PROYECTOS.IDPROYECTO = PROYECTO_ODS.IDPROYECTO 
-              WHERE PROYECTOS.IDPROYECTO = {idProyecto}"
+              WHERE PROYECTO_ODS.IDPROYECTO = {idProyecto}"
         Dim cmdProyectos As New SqlCommand(consultaSQL, conexion)
         Dim drProyectos As SqlDataReader = cmdProyectos.ExecuteReader
         Dim ods As New List(Of ODS)
@@ -210,12 +243,25 @@ Public Class GestionProyecto
         conexion.Open()
         Dim filasAfectadas As Integer = 0
         For Each idODS As Integer In listaOds
-            Dim consultaSQL As String = "Delete from Proyecto_ODS where idproyecto='" & idProyecto & "' and idods='" & idODS & "'"
+            Dim consultaSQL As String = "Delete Proyecto_ODS where idproyecto=" & idProyecto & " and idods=" & idODS
             Dim cmdDescripcion As New SqlCommand(consultaSQL, conexion)
             filasAfectadas = cmdDescripcion.ExecuteNonQuery()
         Next
         conexion.Close()
         Return filasAfectadas > 0
+    End Function
+
+    Public Function EliminarActividad(idproyecto As Integer, idactividad As Integer) As Boolean
+        Dim conexion As New SqlConnection(cadenaConexion)
+        conexion.Open()
+        Dim consultaSQL As String = $"DELETE ALUMNO_ACTIVIDAD WHERE ALUMNO_ACTIVIDAD.IDPROYECTO={idproyecto} AND ALUMNO_ACTIVIDAD.IDACTIVIDAD={idactividad}"
+        Dim consultaSQL2 As String = $"DELETE ACTIVIDADES WHERE ACTIVIDADES.IDPROYECTO={idproyecto} AND ACTIVIDADES.IDACTIVIDAD={idactividad}"
+        Dim cmdDescripcion As New SqlCommand(consultaSQL, conexion)
+        Dim cmdDescripcion2 As New SqlCommand(consultaSQL2, conexion)
+        Dim filasAfectadas = cmdDescripcion.ExecuteNonQuery()
+        Dim filasAfectadas2 = cmdDescripcion2.ExecuteNonQuery()
+        conexion.Close()
+        Return filasAfectadas2 > 0
     End Function
 
 End Class
