@@ -81,6 +81,7 @@ Partial Class Form1
         Me.cboActividadesEliminar = New System.Windows.Forms.ComboBox()
         Me.cboProyectosEliminarAcividad = New System.Windows.Forms.ComboBox()
         Me.grbEliminarActividad = New System.Windows.Forms.GroupBox()
+        Me.btnProyectosAñoIntroducido = New System.Windows.Forms.Button()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grbActividadesDeProyecto.SuspendLayout()
         Me.grbModificarDescripcionProyecto.SuspendLayout()
@@ -660,11 +661,21 @@ Partial Class Form1
         Me.grbEliminarActividad.TabStop = False
         Me.grbEliminarActividad.Text = "Eliminar Actividad"
         '
+        'btnProyectosAñoIntroducido
+        '
+        Me.btnProyectosAñoIntroducido.Location = New System.Drawing.Point(818, 565)
+        Me.btnProyectosAñoIntroducido.Name = "btnProyectosAñoIntroducido"
+        Me.btnProyectosAñoIntroducido.Size = New System.Drawing.Size(298, 45)
+        Me.btnProyectosAñoIntroducido.TabIndex = 49
+        Me.btnProyectosAñoIntroducido.Text = "Proyectos en un año introducido"
+        Me.btnProyectosAñoIntroducido.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1513, 649)
+        Me.Controls.Add(Me.btnProyectosAñoIntroducido)
         Me.Controls.Add(Me.grbEliminarActividad)
         Me.Controls.Add(Me.grbAñadirODSProyecto)
         Me.Controls.Add(Me.grbEliminarODS)
@@ -755,4 +766,5 @@ Partial Class Form1
     Friend WithEvents cboActividadesEliminar As ComboBox
     Friend WithEvents cboProyectosEliminarAcividad As ComboBox
     Friend WithEvents grbEliminarActividad As GroupBox
+    Friend WithEvents btnProyectosAñoIntroducido As Button
 End Class
