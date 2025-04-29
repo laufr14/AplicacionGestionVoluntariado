@@ -13,6 +13,7 @@ Public Class Form1
             Exit Sub
         End If
         actualizarCajas()
+        btnInfoProyectos.PerformClick()
     End Sub
 
     Private Sub btnInfoProyectos_Click(sender As Object, e As EventArgs) Handles btnInfoProyectos.Click
@@ -326,6 +327,26 @@ Public Class Form1
         limpiarTodo()
     End Sub
 
+    Private Sub btnProyectosAñoSeleccionado_Click(sender As Object, e As EventArgs) Handles btnProyectosAñoIntroducido.Click
+        Dim leer As String
+        Dim año As Integer
+        leer = InputBox("Ingrese un año:", "Año para ver los proyectos")
+
+        If Not Integer.TryParse(leer, año) OrElse año > (Today.Year + 1) OrElse año < 2024 Then
+            MessageBox.Show("Eso no es un año válido")
+            Exit Sub
+        End If
+        Dim proyectos As List(Of Proyecto) = gestion.ProyectosPorAño(año)
+        If proyectos.Count = 0 Then
+            MessageBox.Show("Ese año no hubo proyectos activos")
+            Exit Sub
+        End If
+
+        dgv.DataSource = Nothing
+        dgv.DataSource = proyectos
+        lblInformacion.Text = "Proyectos que estuvieron activos en el año " & año
+    End Sub
+
     Private Sub actualizarCajas()
         cboProyectosInfo.Items.Clear()
         cboProyectosModificarDescripcion.Items.Clear()
@@ -335,6 +356,10 @@ Public Class Form1
         cboProyectosEliminarODS.Items.Clear()
         cboOrganizaciones.Items.Clear()
         cboAlumnos.Items.Clear()
+        cboProyectosEliminarAcividad.Items.Clear()
+        cboActividadesEliminar.Items.Clear()
+        cboActividadesAñadirAlumno.Items.Clear()
+        lsbAñadirODS.Items.Clear()
 
         cboProyectosInfo.Items.AddRange(gestion.TodosProyectos().ToArray)
         cboProyectosModificarDescripcion.Items.AddRange(gestion.TodosProyectos().ToArray)
@@ -344,6 +369,7 @@ Public Class Form1
         cboProyectosEliminarODS.Items.AddRange(gestion.TodosProyectos().ToArray)
         cboOrganizaciones.Items.AddRange(gestion.TodasOrganizaciones().ToArray)
         cboAlumnos.Items.AddRange(gestion.TodosAlumnos().ToArray)
+        cboProyectosEliminarAcividad.Items.AddRange(gestion.TodosProyectos().ToArray)
         lsbAñadirODS.Items.AddRange(gestion.ListODS().ToArray)
     End Sub
 
@@ -355,7 +381,6 @@ Public Class Form1
         txtDescripcionActividad.Clear()
         txtNuevaDescripcion.Clear()
 
-        lsbAñadirODS.Items.Clear()
         lsbEliminarODS.Items.Clear()
 
         cboOrganizaciones.SelectedIndex = -1
@@ -374,16 +399,5 @@ Public Class Form1
         dtFechaFinProyecto.Value = DateTime.Now
         dtFechaInicioActividad.Value = DateTime.Now
         dtFechaFinActividad.Value = DateTime.Now
-    End Sub
-
-    Private Sub btnProyectosAñoSeleccionado_Click(sender As Object, e As EventArgs) Handles btnProyectosAñoIntroducido.Click
-        Dim añoSeleccionado As String
-        añoSeleccionado = InputBox("Ingrese un año:", "Año para ver los proyectos")
-
-        If IsNumeric(añoSeleccionado) AndAlso añoSeleccionado.Length = 4 Then
-            MessageBox.Show("El año ingresado es: " & añoSeleccionado)
-        ElseIf añoSeleccionado <> "" Then
-            MessageBox.Show("Año inválido. Debe ser un número de 4 dígitos.")
-        End If
     End Sub
 End Class

@@ -265,4 +265,30 @@ Public Class GestionProyecto
         Return filasAfectadas2 > 0
     End Function
 
+    Public Function ProyectosPorAño(año As Integer) As List(Of Proyecto)
+        Dim conexion As New SqlConnection(cadenaConexion)
+        conexion.Open()
+
+        Dim consultaSQL As String = "Select proyectos.* from proyectos where (YEAR(fecha_inicio) <=" & año & " AND YEAR(fecha_fin) >= " & año & ") or (YEAR(fecha_inicio) = " & año & " AND fecha_fin IS NULL)"
+
+        Dim cmdProyectos As New SqlCommand(consultaSQL, conexion)
+        Dim drProyectos As SqlDataReader = cmdProyectos.ExecuteReader
+        Dim proyectos As New List(Of Proyecto)
+        Dim estado As String = ""
+        While drProyectos.Read
+            If drProyectos("estado") = "TRUE" Then
+                estado = "ACTIVO"
+            Else
+                If drProyectos("fecha_inicio") > Now() Then estado = "PENDIENTE"
+                If drProyectos("fecha_inicio") < Now() Then estado = "TERMINADO"
+            End If
+            If IsDBNull(drProyectos("fecha_fin")) Then
+                proyectos.Add(New Proyecto(drProyectos("idproyecto"), drProyectos("nombre_proyecto"), drProyectos("descripcion"), drProyectos("fecha_inicio"), estado, drProyectos("idorganizacion")))
+            Else
+                proyectos.Add(New Proyecto(drProyectos("idproyecto"), drProyectos("nombre_proyecto"), drProyectos("descripcion"), drProyectos("fecha_inicio"), drProyectos("fecha_fin"), estado, drProyectos("idorganizacion")))
+            End If
+        End While
+        conexion.Close()
+        Return proyectos
+    End Function
 End Class

@@ -37,7 +37,7 @@
     Public Overloads Function Equals(other As Organizacion) As Boolean Implements IEquatable(Of Organizacion).Equals
         Return other IsNot Nothing AndAlso
                IDOrganizacion = other.IDOrganizacion AndAlso
-               CIF = other.CIF
+               CIF.ToLower = other.CIF.ToLower
     End Function
 
     Public Overrides Function GetHashCode() As Integer
