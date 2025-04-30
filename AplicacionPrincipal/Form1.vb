@@ -400,4 +400,8 @@ Public Class Form1
         dtFechaInicioActividad.Value = DateTime.Now
         dtFechaFinActividad.Value = DateTime.Now
     End Sub
+
+    Private Sub cboProyectosCrearActividad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboProyectosCrearActividad.SelectedIndexChanged
+
+    End Sub
 End Class
