@@ -8,7 +8,7 @@ Public Class Form1
     Dim gestion As New GestionProyecto
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not gestion.CargarFichero() Then
-            MessageBox.Show("Fallo en la lectura del fichero.txt")
+            MessageBox.Show("Fallo en la lectura del fichero servidor.txt")
             Close()
             Exit Sub
         End If
@@ -225,9 +225,25 @@ Public Class Form1
         limpiarTodo()
     End Sub
 
+    Private Sub btnBuscarProyectoPorODS_Click(sender As Object, e As EventArgs) Handles btnBuscarProyectoPorODS.Click
+        Dim a As ListBox.SelectedObjectCollection = lsbBuscarProyectoPorODS.SelectedItems
+
+        If a.Count = 0 Then
+            MessageBox.Show("No se ha seleccionado ninguna ODS")
+            Exit Sub
+        End If
+
+        Dim ods As ODS = a(0)
+        dgv.DataSource = Nothing
+        dgv.DataSource = gestion.ProyectosPorODS(ods)
+        lblInformacion.Text = "Información de los proyectos que tienen la ods " & ods.Nombre
+        limpiarTodo()
+    End Sub
+
     Private Sub btnAñadirODSProyecto_Click(sender As Object, e As EventArgs) Handles btnAñadirODSProyecto.Click
         If cboProyectosAñadirODS.SelectedItem Is Nothing Then
             MessageBox.Show("No se ha seleccionado ningún proyecto")
+            limpiarTodo()
             Exit Sub
         End If
 
@@ -235,6 +251,7 @@ Public Class Form1
 
         If a.Count = 0 Then
             MessageBox.Show("No se ha seleccionado ninguna ODS")
+            limpiarTodo()
             Exit Sub
         End If
 
@@ -252,8 +269,11 @@ Public Class Form1
             MessageBox.Show("Se ha añadido correctamente")
         Else
             MessageBox.Show("No se ha podido añadir nada")
+            limpiarTodo()
             Exit Sub
         End If
+        actualizarCajas()
+        limpiarTodo()
     End Sub
 
     Private Sub btnBuscarODSProyecto_Click(sender As Object, e As EventArgs) Handles btnBuscarODSProyecto.Click
@@ -360,6 +380,7 @@ Public Class Form1
         cboActividadesEliminar.Items.Clear()
         cboActividadesAñadirAlumno.Items.Clear()
         lsbAñadirODS.Items.Clear()
+        lsbBuscarProyectoPorODS.Items.Clear()
 
         cboProyectosInfo.Items.AddRange(gestion.TodosProyectos().ToArray)
         cboProyectosModificarDescripcion.Items.AddRange(gestion.TodosProyectos().ToArray)
@@ -371,6 +392,7 @@ Public Class Form1
         cboAlumnos.Items.AddRange(gestion.TodosAlumnos().ToArray)
         cboProyectosEliminarAcividad.Items.AddRange(gestion.TodosProyectos().ToArray)
         lsbAñadirODS.Items.AddRange(gestion.ListODS().ToArray)
+        lsbBuscarProyectoPorODS.Items.AddRange(gestion.ListODS().ToArray)
     End Sub
 
     Private Sub limpiarTodo()
@@ -382,6 +404,7 @@ Public Class Form1
         txtNuevaDescripcion.Clear()
 
         lsbEliminarODS.Items.Clear()
+        lsbAñadirODS.SelectedIndex = -1
 
         cboOrganizaciones.SelectedIndex = -1
         cboProyectosAñadirODS.SelectedIndex = -1
@@ -401,7 +424,4 @@ Public Class Form1
         dtFechaFinActividad.Value = DateTime.Now
     End Sub
 
-    Private Sub cboProyectosCrearActividad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboProyectosCrearActividad.SelectedIndexChanged
-
-    End Sub
 End Class

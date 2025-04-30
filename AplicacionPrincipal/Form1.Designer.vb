@@ -82,6 +82,9 @@ Partial Class Form1
         Me.cboProyectosEliminarAcividad = New System.Windows.Forms.ComboBox()
         Me.grbEliminarActividad = New System.Windows.Forms.GroupBox()
         Me.btnProyectosAñoIntroducido = New System.Windows.Forms.Button()
+        Me.lsbBuscarProyectoPorODS = New System.Windows.Forms.ListBox()
+        Me.btnBuscarProyectoPorODS = New System.Windows.Forms.Button()
+        Me.grbBuscarProyectoPorODS = New System.Windows.Forms.GroupBox()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grbActividadesDeProyecto.SuspendLayout()
         Me.grbModificarDescripcionProyecto.SuspendLayout()
@@ -91,6 +94,7 @@ Partial Class Form1
         Me.grbEliminarODS.SuspendLayout()
         Me.grbAñadirODSProyecto.SuspendLayout()
         Me.grbEliminarActividad.SuspendLayout()
+        Me.grbBuscarProyectoPorODS.SuspendLayout()
         Me.SuspendLayout()
         '
         'dgv
@@ -670,11 +674,41 @@ Partial Class Form1
         Me.btnProyectosAñoIntroducido.Text = "Proyectos en un año introducido"
         Me.btnProyectosAñoIntroducido.UseVisualStyleBackColor = True
         '
+        'lsbBuscarProyectoPorODS
+        '
+        Me.lsbBuscarProyectoPorODS.FormattingEnabled = True
+        Me.lsbBuscarProyectoPorODS.ItemHeight = 16
+        Me.lsbBuscarProyectoPorODS.Location = New System.Drawing.Point(6, 70)
+        Me.lsbBuscarProyectoPorODS.Name = "lsbBuscarProyectoPorODS"
+        Me.lsbBuscarProyectoPorODS.Size = New System.Drawing.Size(241, 228)
+        Me.lsbBuscarProyectoPorODS.TabIndex = 50
+        '
+        'btnBuscarProyectoPorODS
+        '
+        Me.btnBuscarProyectoPorODS.Location = New System.Drawing.Point(6, 24)
+        Me.btnBuscarProyectoPorODS.Name = "btnBuscarProyectoPorODS"
+        Me.btnBuscarProyectoPorODS.Size = New System.Drawing.Size(241, 29)
+        Me.btnBuscarProyectoPorODS.TabIndex = 51
+        Me.btnBuscarProyectoPorODS.Text = "Buscar ODSs del proyecto"
+        Me.btnBuscarProyectoPorODS.UseVisualStyleBackColor = True
+        '
+        'grbBuscarProyectoPorODS
+        '
+        Me.grbBuscarProyectoPorODS.Controls.Add(Me.btnBuscarProyectoPorODS)
+        Me.grbBuscarProyectoPorODS.Controls.Add(Me.lsbBuscarProyectoPorODS)
+        Me.grbBuscarProyectoPorODS.Location = New System.Drawing.Point(630, 333)
+        Me.grbBuscarProyectoPorODS.Name = "grbBuscarProyectoPorODS"
+        Me.grbBuscarProyectoPorODS.Size = New System.Drawing.Size(260, 303)
+        Me.grbBuscarProyectoPorODS.TabIndex = 52
+        Me.grbBuscarProyectoPorODS.TabStop = False
+        Me.grbBuscarProyectoPorODS.Text = "Buscar proyecto por ODS"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1513, 649)
+        Me.Controls.Add(Me.grbBuscarProyectoPorODS)
         Me.Controls.Add(Me.btnProyectosAñoIntroducido)
         Me.Controls.Add(Me.grbEliminarActividad)
         Me.Controls.Add(Me.grbAñadirODSProyecto)
@@ -703,6 +737,7 @@ Partial Class Form1
         Me.grbAñadirODSProyecto.ResumeLayout(False)
         Me.grbEliminarActividad.ResumeLayout(False)
         Me.grbEliminarActividad.PerformLayout()
+        Me.grbBuscarProyectoPorODS.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -767,4 +802,7 @@ Partial Class Form1
     Friend WithEvents cboProyectosEliminarAcividad As ComboBox
     Friend WithEvents grbEliminarActividad As GroupBox
     Friend WithEvents btnProyectosAñoIntroducido As Button
+    Friend WithEvents lsbBuscarProyectoPorODS As ListBox
+    Friend WithEvents btnBuscarProyectoPorODS As Button
+    Friend WithEvents grbBuscarProyectoPorODS As GroupBox
 End Class
