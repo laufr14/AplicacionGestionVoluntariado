@@ -100,7 +100,7 @@ Partial Class Form1
         'dgv
         '
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Location = New System.Drawing.Point(844, 48)
+        Me.dgv.Location = New System.Drawing.Point(829, 41)
         Me.dgv.MultiSelect = False
         Me.dgv.Name = "dgv"
         Me.dgv.RowHeadersWidth = 51
@@ -112,7 +112,7 @@ Partial Class Form1
         '
         Me.lblInformacion.BackColor = System.Drawing.Color.PaleGreen
         Me.lblInformacion.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblInformacion.Location = New System.Drawing.Point(844, 9)
+        Me.lblInformacion.Location = New System.Drawing.Point(829, 2)
         Me.lblInformacion.Name = "lblInformacion"
         Me.lblInformacion.Size = New System.Drawing.Size(657, 25)
         Me.lblInformacion.TabIndex = 1
@@ -188,7 +188,7 @@ Partial Class Form1
         '
         'btnInfoProyectos
         '
-        Me.btnInfoProyectos.Location = New System.Drawing.Point(1200, 241)
+        Me.btnInfoProyectos.Location = New System.Drawing.Point(1185, 234)
         Me.btnInfoProyectos.Name = "btnInfoProyectos"
         Me.btnInfoProyectos.Size = New System.Drawing.Size(301, 35)
         Me.btnInfoProyectos.TabIndex = 13
@@ -243,7 +243,7 @@ Partial Class Form1
         '
         Me.cboProyectosAñadirAlumnoActividad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboProyectosAñadirAlumnoActividad.FormattingEnabled = True
-        Me.cboProyectosAñadirAlumnoActividad.Location = New System.Drawing.Point(104, 65)
+        Me.cboProyectosAñadirAlumnoActividad.Location = New System.Drawing.Point(101, 96)
         Me.cboProyectosAñadirAlumnoActividad.Name = "cboProyectosAñadirAlumnoActividad"
         Me.cboProyectosAñadirAlumnoActividad.Size = New System.Drawing.Size(172, 24)
         Me.cboProyectosAñadirAlumnoActividad.TabIndex = 19
@@ -252,7 +252,7 @@ Partial Class Form1
         '
         Me.cboAlumnos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAlumnos.FormattingEnabled = True
-        Me.cboAlumnos.Location = New System.Drawing.Point(104, 25)
+        Me.cboAlumnos.Location = New System.Drawing.Point(101, 56)
         Me.cboAlumnos.Name = "cboAlumnos"
         Me.cboAlumnos.Size = New System.Drawing.Size(172, 24)
         Me.cboAlumnos.TabIndex = 20
@@ -261,7 +261,7 @@ Partial Class Form1
         '
         Me.cboActividadesAñadirAlumno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboActividadesAñadirAlumno.FormattingEnabled = True
-        Me.cboActividadesAñadirAlumno.Location = New System.Drawing.Point(104, 105)
+        Me.cboActividadesAñadirAlumno.Location = New System.Drawing.Point(101, 136)
         Me.cboActividadesAñadirAlumno.Name = "cboActividadesAñadirAlumno"
         Me.cboActividadesAñadirAlumno.Size = New System.Drawing.Size(172, 24)
         Me.cboActividadesAñadirAlumno.TabIndex = 21
@@ -279,9 +279,9 @@ Partial Class Form1
         '
         Me.grbActividadesDeProyecto.Controls.Add(Me.btnInfoProyectoSeleccionado)
         Me.grbActividadesDeProyecto.Controls.Add(Me.cboProyectosInfo)
-        Me.grbActividadesDeProyecto.Location = New System.Drawing.Point(902, 238)
+        Me.grbActividadesDeProyecto.Location = New System.Drawing.Point(829, 231)
         Me.grbActividadesDeProyecto.Name = "grbActividadesDeProyecto"
-        Me.grbActividadesDeProyecto.Size = New System.Drawing.Size(282, 99)
+        Me.grbActividadesDeProyecto.Size = New System.Drawing.Size(340, 99)
         Me.grbActividadesDeProyecto.TabIndex = 23
         Me.grbActividadesDeProyecto.TabStop = False
         Me.grbActividadesDeProyecto.Text = "Actividades de un proyecto"
@@ -291,7 +291,7 @@ Partial Class Form1
         Me.grbModificarDescripcionProyecto.Controls.Add(Me.cboProyectosModificarDescripcion)
         Me.grbModificarDescripcionProyecto.Controls.Add(Me.btnModificarDescripcion)
         Me.grbModificarDescripcionProyecto.Controls.Add(Me.txtNuevaDescripcion)
-        Me.grbModificarDescripcionProyecto.Location = New System.Drawing.Point(1200, 291)
+        Me.grbModificarDescripcionProyecto.Location = New System.Drawing.Point(1185, 284)
         Me.grbModificarDescripcionProyecto.Name = "grbModificarDescripcionProyecto"
         Me.grbModificarDescripcionProyecto.Size = New System.Drawing.Size(300, 171)
         Me.grbModificarDescripcionProyecto.TabIndex = 24
@@ -301,7 +301,7 @@ Partial Class Form1
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(9, 25)
+        Me.Label6.Location = New System.Drawing.Point(6, 56)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(59, 16)
         Me.Label6.TabIndex = 25
@@ -310,7 +310,7 @@ Partial Class Form1
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(9, 65)
+        Me.Label7.Location = New System.Drawing.Point(6, 96)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(68, 16)
         Me.Label7.TabIndex = 26
@@ -319,7 +319,7 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(9, 105)
+        Me.Label8.Location = New System.Drawing.Point(6, 136)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(78, 16)
         Me.Label8.TabIndex = 27
@@ -327,7 +327,7 @@ Partial Class Form1
         '
         'btnAñadirAlumnoActividad
         '
-        Me.btnAñadirAlumnoActividad.Location = New System.Drawing.Point(12, 135)
+        Me.btnAñadirAlumnoActividad.Location = New System.Drawing.Point(12, 193)
         Me.btnAñadirAlumnoActividad.Name = "btnAñadirAlumnoActividad"
         Me.btnAñadirAlumnoActividad.Size = New System.Drawing.Size(264, 34)
         Me.btnAñadirAlumnoActividad.TabIndex = 28
@@ -343,9 +343,9 @@ Partial Class Form1
         Me.grbAñadirAlumnoActividad.Controls.Add(Me.cboActividadesAñadirAlumno)
         Me.grbAñadirAlumnoActividad.Controls.Add(Me.cboAlumnos)
         Me.grbAñadirAlumnoActividad.Controls.Add(Me.cboProyectosAñadirAlumnoActividad)
-        Me.grbAñadirAlumnoActividad.Location = New System.Drawing.Point(902, 343)
+        Me.grbAñadirAlumnoActividad.Location = New System.Drawing.Point(829, 329)
         Me.grbAñadirAlumnoActividad.Name = "grbAñadirAlumnoActividad"
-        Me.grbAñadirAlumnoActividad.Size = New System.Drawing.Size(282, 173)
+        Me.grbAñadirAlumnoActividad.Size = New System.Drawing.Size(340, 247)
         Me.grbAñadirAlumnoActividad.TabIndex = 29
         Me.grbAñadirAlumnoActividad.TabStop = False
         Me.grbAñadirAlumnoActividad.Text = "Añadir alumno a actividad"
@@ -658,18 +658,18 @@ Partial Class Form1
         Me.grbEliminarActividad.Controls.Add(Me.Label16)
         Me.grbEliminarActividad.Controls.Add(Me.cboActividadesEliminar)
         Me.grbEliminarActividad.Controls.Add(Me.cboProyectosEliminarAcividad)
-        Me.grbEliminarActividad.Location = New System.Drawing.Point(1200, 472)
+        Me.grbEliminarActividad.Location = New System.Drawing.Point(1185, 461)
         Me.grbEliminarActividad.Name = "grbEliminarActividad"
-        Me.grbEliminarActividad.Size = New System.Drawing.Size(299, 165)
+        Me.grbEliminarActividad.Size = New System.Drawing.Size(299, 166)
         Me.grbEliminarActividad.TabIndex = 48
         Me.grbEliminarActividad.TabStop = False
         Me.grbEliminarActividad.Text = "Eliminar Actividad"
         '
         'btnProyectosAñoIntroducido
         '
-        Me.btnProyectosAñoIntroducido.Location = New System.Drawing.Point(902, 526)
+        Me.btnProyectosAñoIntroducido.Location = New System.Drawing.Point(829, 582)
         Me.btnProyectosAñoIntroducido.Name = "btnProyectosAñoIntroducido"
-        Me.btnProyectosAñoIntroducido.Size = New System.Drawing.Size(282, 45)
+        Me.btnProyectosAñoIntroducido.Size = New System.Drawing.Size(340, 45)
         Me.btnProyectosAñoIntroducido.TabIndex = 49
         Me.btnProyectosAñoIntroducido.Text = "Proyectos en un año introducido"
         Me.btnProyectosAñoIntroducido.UseVisualStyleBackColor = True
@@ -680,14 +680,14 @@ Partial Class Form1
         Me.lsbBuscarProyectoPorODS.ItemHeight = 16
         Me.lsbBuscarProyectoPorODS.Location = New System.Drawing.Point(6, 70)
         Me.lsbBuscarProyectoPorODS.Name = "lsbBuscarProyectoPorODS"
-        Me.lsbBuscarProyectoPorODS.Size = New System.Drawing.Size(241, 228)
+        Me.lsbBuscarProyectoPorODS.Size = New System.Drawing.Size(181, 228)
         Me.lsbBuscarProyectoPorODS.TabIndex = 50
         '
         'btnBuscarProyectoPorODS
         '
         Me.btnBuscarProyectoPorODS.Location = New System.Drawing.Point(6, 24)
         Me.btnBuscarProyectoPorODS.Name = "btnBuscarProyectoPorODS"
-        Me.btnBuscarProyectoPorODS.Size = New System.Drawing.Size(241, 29)
+        Me.btnBuscarProyectoPorODS.Size = New System.Drawing.Size(181, 29)
         Me.btnBuscarProyectoPorODS.TabIndex = 51
         Me.btnBuscarProyectoPorODS.Text = "Buscar ODSs del proyecto"
         Me.btnBuscarProyectoPorODS.UseVisualStyleBackColor = True
@@ -696,9 +696,9 @@ Partial Class Form1
         '
         Me.grbBuscarProyectoPorODS.Controls.Add(Me.btnBuscarProyectoPorODS)
         Me.grbBuscarProyectoPorODS.Controls.Add(Me.lsbBuscarProyectoPorODS)
-        Me.grbBuscarProyectoPorODS.Location = New System.Drawing.Point(630, 333)
+        Me.grbBuscarProyectoPorODS.Location = New System.Drawing.Point(630, 336)
         Me.grbBuscarProyectoPorODS.Name = "grbBuscarProyectoPorODS"
-        Me.grbBuscarProyectoPorODS.Size = New System.Drawing.Size(260, 303)
+        Me.grbBuscarProyectoPorODS.Size = New System.Drawing.Size(193, 300)
         Me.grbBuscarProyectoPorODS.TabIndex = 52
         Me.grbBuscarProyectoPorODS.TabStop = False
         Me.grbBuscarProyectoPorODS.Text = "Buscar proyecto por ODS"
@@ -707,7 +707,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1513, 649)
+        Me.ClientSize = New System.Drawing.Size(1504, 649)
         Me.Controls.Add(Me.grbBuscarProyectoPorODS)
         Me.Controls.Add(Me.btnProyectosAñoIntroducido)
         Me.Controls.Add(Me.grbEliminarActividad)
