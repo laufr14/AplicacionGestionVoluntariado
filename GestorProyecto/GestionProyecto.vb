@@ -14,6 +14,15 @@ Public Class GestionProyecto
         cadenaConexion = $"Data Source = {servidor}; Initial Catalog = DATABASEVOLUNTARIADO; Integrated Security = SSPI; MultipleActiveResultSets=true"
         Return True
     End Function
+    Public Function CargarDatabase() As Boolean
+        Try
+            Dim conexion As New SqlConnection(cadenaConexion)
+            conexion.Open()
+        Catch ex As Exception
+            Return False
+        End Try
+        Return True
+    End Function
 
     Public Function TodosProyectos() As List(Of Proyecto)
         Dim conexion As New SqlConnection(cadenaConexion)

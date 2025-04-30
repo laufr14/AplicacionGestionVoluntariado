@@ -12,6 +12,11 @@ Public Class Form1
             Close()
             Exit Sub
         End If
+        If Not gestion.CargarDatabase Then
+            MessageBox.Show("Fallo en la conexión a la base de datos")
+            Close()
+            Exit Sub
+        End If
         actualizarCajas()
         btnInfoProyectos.PerformClick()
     End Sub
