@@ -15,12 +15,13 @@ Public Class GestionProyecto
         Return True
     End Function
     Public Function CargarDatabase() As Boolean
+        Dim conexion As New SqlConnection(cadenaConexion)
         Try
-            Dim conexion As New SqlConnection(cadenaConexion)
             conexion.Open()
         Catch ex As Exception
             Return False
         End Try
+        conexion.Close()
         Return True
     End Function
 
